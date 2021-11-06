@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/vehicleImageView"
+            android:layout_width="104dp"
+            android:layout_height="102dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@drawable/ic_baseline_directions_car_24" />
+
+
+        <Space
+            android:id="@+id/space3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/modelText"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Model:"
+            app:layout_constraintBottom_toTopOf="@+id/mileageText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vehicleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/makeText" />
+
+        <TextView
+            android:id="@+id/makeText"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:text="Make: "
+            app:layout_constraintBottom_toTopOf="@+id/modelText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vehicleImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/yearText"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Year:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vehicleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/mileageText" />
+
+        <TextView
+            android:id="@+id/mileageText"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Mileage: "
+            app:layout_constraintBottom_toTopOf="@+id/yearText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vehicleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/modelText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

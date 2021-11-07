@@ -12,6 +12,10 @@ class VehicleViewModel(private val repository: VehicleRepository) : ViewModel() 
     fun insert(vehicle: Vehicle) = viewModelScope.launch {
         repository.insert(vehicle)
     }
+
+    fun remove(vehicle: Vehicle) = viewModelScope.launch {
+        repository.remove(vehicle)
+    }
 }
 
 class VehicleViewModelFactory(private val repository: VehicleRepository) : ViewModelProvider.Factory {

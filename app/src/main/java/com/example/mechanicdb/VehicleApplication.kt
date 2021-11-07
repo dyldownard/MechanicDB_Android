@@ -13,6 +13,6 @@ class VehicleApplication : Application() {
     }
 
     val repository by lazy {
-        VehicleRepository(database.vehicleDao())
+        VehicleRepository(database.vehicleDao(), applicationScope)
     }
 }

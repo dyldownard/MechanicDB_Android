@@ -1,16 +1,26 @@
 package com.example.mechanicdb
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicdb.models.Vehicle
 import kotlinx.android.synthetic.main.activity_garage_list.*
 import kotlinx.android.synthetic.main.sign_in.*
+import java.security.AccessController.getContext
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,13 +38,60 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
 
         vehicleViewModel.allVehicles.observe(this, Observer { vehicles ->
-            vehicles.let{
+            vehicles.let {
                 vehicleAdapter.submitList(it)
             }
         })
 
+
         addVehicleButton.setOnClickListener{
-            vehicleViewModel.insert(Vehicle("Ford","Mustang", "1965","1000",1, 0,"10002"))
+            val dialogBuilder = AlertDialog.Builder(this)
+
+            val makeInput = EditText(this)
+            val modelInput = EditText(this)
+            val yearInput = EditText(this)
+            val mileageInput = EditText(this)
+            val vinInput = EditText(this)
+
+            val llayout = LinearLayout(this)
+            llayout.orientation = LinearLayout.VERTICAL
+
+            makeInput.hint = "Make"
+            modelInput.hint = "Model"
+            yearInput.hint = "Year"
+            mileageInput.hint = "Mileage"
+            vinInput.hint = "VIN"
+
+            makeInput.inputType = InputType.TYPE_CLASS_TEXT
+            modelInput.inputType = InputType.TYPE_CLASS_TEXT
+            yearInput.inputType = InputType.TYPE_CLASS_NUMBER
+            mileageInput.inputType = InputType.TYPE_CLASS_NUMBER
+            vinInput.inputType = InputType.TYPE_CLASS_NUMBER
+
+            llayout.addView(makeInput)
+            llayout.addView(modelInput)
+            llayout.addView(yearInput)
+            llayout.addView(mileageInput)
+            llayout.addView(vinInput)
+
+            // set message of alert dialog
+            dialogBuilder
+                .setCancelable(false)
+                .setView(llayout)
+                .setPositiveButton("Proceed") { dialog, id ->
+                    var veh = Vehicle(makeInput.text.toString(), modelInput.text.toString(), yearInput.text.toString(), mileageInput.text.toString(), 1,0, vinInput.text.toString())
+                    vehicleViewModel.insert(veh)
+                    dialog.cancel()
+                }
+                // negative button text and action
+                .setNegativeButton("Cancel") { dialog, id ->
+                    dialog.cancel()
+                }
+
+            val alert = dialogBuilder.create()
+            alert.setTitle("Add Vehicle")
+            alert.show()
+            //vehicleViewModel.insert(Vehicle("Ford", "Mustang", "1965", "1000", 1, 0, "10002"))
         }
     }
 
@@ -44,14 +101,24 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             val topSpacing = RecyclerItemSpacing(30)
             addItemDecoration(topSpacing)
-            vehicleAdapter = GarageRecyclerAdapter(GarageRecyclerAdapter.OnClickListener {vehicle ->
-                val intent = Intent(app, VehicleViewActivity::class.java).apply{
+            vehicleAdapter = GarageRecyclerAdapter(GarageRecyclerAdapter.OnClickListener { vehicle ->
+                val intent = Intent(app, VehicleViewActivity::class.java).apply {
                     putExtra("vehicle", vehicle)
                 }
-                startActivityForResult(intent,1)
+                startActivityForResult(intent, 1)
             })
             adapter = vehicleAdapter
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+
+        if (resultCode == Activity.RESULT_OK) {
+            intentData!!.getParcelableExtra<Vehicle>("vehicle")?.let{ reply ->
+                vehicleViewModel.remove(reply)
+            }
+        }
+    }
 }
+

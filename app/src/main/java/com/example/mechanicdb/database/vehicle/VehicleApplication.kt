@@ -1,4 +1,4 @@
-package com.example.mechanicdb
+package com.example.mechanicdb.database.vehicle
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope

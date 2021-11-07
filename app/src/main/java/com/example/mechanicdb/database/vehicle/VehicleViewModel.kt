@@ -1,4 +1,4 @@
-package com.example.mechanicdb
+package com.example.mechanicdb.database.vehicle
 
 import androidx.lifecycle.*
 import com.example.mechanicdb.models.Vehicle

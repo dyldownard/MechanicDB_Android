@@ -1,4 +1,4 @@
-package com.example.mechanicdb
+package com.example.mechanicdb.database.vehicle
 
 import androidx.annotation.WorkerThread
 import com.example.mechanicdb.models.Vehicle

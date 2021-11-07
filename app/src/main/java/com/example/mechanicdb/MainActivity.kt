@@ -1,7 +1,6 @@
 package com.example.mechanicdb
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -10,16 +9,14 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mechanicdb.database.vehicle.VehicleApplication
+import com.example.mechanicdb.database.vehicle.VehicleViewModel
+import com.example.mechanicdb.database.vehicle.VehicleViewModelFactory
 import com.example.mechanicdb.models.Vehicle
 import kotlinx.android.synthetic.main.activity_garage_list.*
 import kotlinx.android.synthetic.main.sign_in.*
-import java.security.AccessController.getContext
 
 
 class MainActivity : AppCompatActivity() {

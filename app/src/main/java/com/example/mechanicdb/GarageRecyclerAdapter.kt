@@ -6,40 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicdb.models.Vehicle
 
 import kotlinx.android.synthetic.main.garage_list_item.view.*
 
-class GarageRecyclerAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GarageRecyclerAdapter(private val onClickListener: OnClickListener) : ListAdapter<Vehicle, GarageRecyclerAdapter.VehicleViewHolder>(VehicleComparator()) {
 
-    private var items: List<Vehicle> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return VehicleViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.garage_list_item, parent, false)
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VehicleViewHolder {
+        return VehicleViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VehicleViewHolder, position: Int) {
+        val current = getItem(position)
         when(holder) {
             is VehicleViewHolder -> {
-                val vehicle = items[position]
                 holder.itemView.setOnClickListener{
-                    onClickListener.onClick(vehicle)
+                    onClickListener.onClick(current)
                 }
-                holder.bind(items.get(position))
+                holder.bind(current)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-    fun submitList(vehicleList: List<Vehicle>) {
-        items = vehicleList
-    }
 
     class VehicleViewHolder constructor(
         itemView: View
@@ -60,9 +52,30 @@ class GarageRecyclerAdapter(private val onClickListener: OnClickListener) : Recy
                 contentDescription = "a car"
             }
         }
+
+        companion object{
+            fun create(parent: ViewGroup): VehicleViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                        .inflate(R.layout.garage_list_item, parent, false)
+                return VehicleViewHolder(view)
+            }
+        }
     }
 
     class OnClickListener(val clickListener: (vehicle: Vehicle) -> Unit) {
         fun onClick(vehicle: Vehicle) = clickListener(vehicle)
     }
+
+    class VehicleComparator : DiffUtil.ItemCallback<Vehicle>() {
+        override fun areItemsTheSame(oldItem: Vehicle, newItem: Vehicle): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Vehicle, newItem: Vehicle): Boolean {
+            return oldItem.vid == newItem.vid
+        }
+
+    }
+
+
 }

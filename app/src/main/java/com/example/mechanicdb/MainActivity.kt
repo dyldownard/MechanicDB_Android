@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,12 +27,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_garage_list)
         initRecyclerView()
 
-        vehicleViewModel.allVehicles.observe(owner = this) { vehicles ->
-            vehicles.let{vehicleAdapter.submitList(it)}
-        }
+        vehicleViewModel.allVehicles.observe(this, Observer { vehicles ->
+            vehicles.let{
+                vehicleAdapter.submitList(it)
+            }
+        })
 
         addVehicleButton.setOnClickListener{
-
             vehicleViewModel.insert(Vehicle("Ford","Mustang", "1965","1000",1, 0,"10002"))
         }
     }

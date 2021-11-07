@@ -21,8 +21,6 @@ abstract class VehicleRoomDatabase : RoomDatabase() {
             INSTANCE?.let {
                 database ->
                 scope.launch {
-                    var vehicleDao = database.vehicleDao()
-                    vehicleDao.insertVehicle(Vehicle("Ford","Mustang", "1965","1000",1, 0,"10002"))
                 }
             }
         }

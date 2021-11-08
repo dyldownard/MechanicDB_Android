@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VehicleViewActivity"  android:parentActivityName=".MainActivity"></activity>
+        <activity android:launchMode="singleInstance" android:name=".VehicleViewActivity"  android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".TaskViewActivity" android:parentActivityName=".VehicleViewActivity"></activity>
     </application>
 
 </manifest>

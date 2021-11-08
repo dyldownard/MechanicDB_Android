@@ -16,7 +16,6 @@ import com.example.mechanicdb.database.vehicle.VehicleViewModel
 import com.example.mechanicdb.database.vehicle.VehicleViewModelFactory
 import com.example.mechanicdb.models.Vehicle
 import kotlinx.android.synthetic.main.activity_garage_list.*
-import kotlinx.android.synthetic.main.sign_in.*
 
 
 class MainActivity : AppCompatActivity() {

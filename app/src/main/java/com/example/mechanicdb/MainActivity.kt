@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mechanicdb.database.vehicle.VehicleApplication
+import com.example.mechanicdb.database.MechanicApplication
 import com.example.mechanicdb.database.vehicle.VehicleViewModel
 import com.example.mechanicdb.database.vehicle.VehicleViewModelFactory
 import com.example.mechanicdb.models.Vehicle
@@ -23,9 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var vehicleAdapter: GarageRecyclerAdapter
 
-    private val newVehicleRequestCode = 1
     private val vehicleViewModel: VehicleViewModel by viewModels {
-        VehicleViewModelFactory((application as VehicleApplication).repository)
+        VehicleViewModelFactory((application as MechanicApplication).vehicle_repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

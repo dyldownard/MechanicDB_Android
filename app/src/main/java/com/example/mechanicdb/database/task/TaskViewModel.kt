@@ -2,12 +2,13 @@ package com.example.mechanicdb.database.task
 
 import androidx.lifecycle.*
 import com.example.mechanicdb.models.Task
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
-    val allTasks: LiveData<List<Task>> = repository.allTasks.asLiveData()
+    val allTasks: MutableLiveData<List<Task>> = repository.allTasks.asLiveData() as MutableLiveData<List<Task>>
 
     fun insert(task: Task) = viewModelScope.launch {
         repository.insert(task)
@@ -15,6 +16,10 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
     fun remove(task: Task) = viewModelScope.launch {
         repository.remove(task)
+    }
+
+    fun getTasks(vid: Int) = viewModelScope.launch {
+        repository.getTasks(vid).collect { allTasks.postValue(it) }
     }
 }
 

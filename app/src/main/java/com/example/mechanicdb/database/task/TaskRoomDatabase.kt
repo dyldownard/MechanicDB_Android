@@ -35,7 +35,7 @@ abstract class TaskRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TaskRoomDatabase::class.java,
-                    "vehicle_database"
+                    "task_database"
                 ).addCallback(TaskDatabaseCallback(scope)).build()
                 INSTANCE = instance
                 instance

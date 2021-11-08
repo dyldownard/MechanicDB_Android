@@ -16,7 +16,9 @@ interface TaskDao {
     @Update
     fun updateTask(task: Task)
 
-    @Query("SELECT * FROM task WHERE vid = :vid")
-    fun getAll(vid: Int): Flow<List<Task>>
+    @Query("SELECT * FROM task")
+    fun getAll(): Flow<List<Task>>
 
+    @Query("SELECT * FROM task WHERE vid = :vid")
+    fun getTasks(vid: Int): Flow<List<Task>>
 }

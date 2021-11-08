@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicdb.models.Task
-import com.example.mechanicdb.models.TimeConverter
 
 import kotlinx.android.synthetic.main.garage_list_item.view.*
 
@@ -44,8 +43,7 @@ class TaskRecyclerAdapter(private val onClickListener: OnClickListener) : ListAd
             task_name.text = "Task: ".plus(task.name)
             task_compby.text = "Completed By: ".plus(task.compby)
             task_odo.text = "Odometer: ".plus(task.odo)
-            var date = TimeConverter.fromTimestamp(task.datecomp).toString()
-            task_compdate.text = "Completed: ".plus(date)
+            task_compdate.text = "Completed: ".plus(task.datecomp)
         }
 
         companion object{

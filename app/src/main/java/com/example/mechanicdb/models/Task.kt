@@ -16,7 +16,7 @@ data class Task (
     @ColumnInfo(name= "completed_by")       var compby: String,
     @ColumnInfo(name= "desc")               var desc: String,
     @ColumnInfo(name= "odo")                var odo: String?,
-    @ColumnInfo(name= "tprice")             var tprice: Double,
-    @ColumnInfo(name= "datecomp")           var datecomp: Long,
-    @ColumnInfo(name= "datestart")          var datestart: Long,
+    @ColumnInfo(name= "tprice")             var tprice: String,
+    @ColumnInfo(name= "datecomp")           var datecomp: String,
+    @ColumnInfo(name= "datestart")          var datestart: String,
 ): Parcelable

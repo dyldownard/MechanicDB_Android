@@ -6,11 +6,12 @@ import com.example.mechanicdb.database.task.TaskDao
 import com.example.mechanicdb.models.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class TaskRepository(private val taskDao: TaskDao, private val scope: CoroutineScope) {
 
-    val allTasks: Flow<List<Task>> = taskDao.getAll()
+    val allTasks: Flow<List<Task>> = flow {}
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

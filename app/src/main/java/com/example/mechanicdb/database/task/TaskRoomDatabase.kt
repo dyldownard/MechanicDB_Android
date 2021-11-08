@@ -1,6 +1,7 @@
 package com.example.mechanicdb.database.task
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,7 +10,7 @@ import com.example.mechanicdb.models.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [Task::class], version = 4)
 abstract class TaskRoomDatabase : RoomDatabase() {
     abstract fun taskDao() : TaskDao
 
